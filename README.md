@@ -17,4 +17,4 @@ The `+` on the receiver is connected to the 5V pin. The `-` is connected to GND.
 
 ![](images/remote_calibration.png)
 
-Upload `receiver.ino` to an Arduino board. Connect the pins as indicated in that script and the receiver wiring diagram. The calibration program connects to your device. Update the `PORT` values in `remote_serial.py` to match the port shown in the Arduino IDE. Change the center and deviation values in `calibration.py` so the ball reaches the edge of the box, but no farther. 
+Upload `receiver.ino` to an Arduino board. Connect the pins as indicated in that script and the receiver wiring diagram. The calibration program connects to your device. Update the `PORT` values in `remote_serial.py` to match the port shown in the Arduino IDE. Change the center and deviation values in `calibration.py` so the ball reaches the edge of the box, but no farther. The numbers represent width of the PWM signal in microseconds for each channel.
