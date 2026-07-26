@@ -13,9 +13,12 @@ def connect():
 def read_data():
     global device
     if device == None:
-        return
+        return None
+    
     if device.in_waiting > 0:
         raw_data = device.readline()
         clean_data = raw_data.decode('utf-8').strip()
 
-        print(clean_data)
+        return clean_data
+    else:
+        return None
