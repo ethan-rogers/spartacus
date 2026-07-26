@@ -22,3 +22,7 @@ def read_data():
         return clean_data
     else:
         return None
+
+def close_port():
+    global device
+    device.close()

@@ -1,9 +1,9 @@
 #include <PinChangeInterrupt.h>
 
-#define T_PIN 7  // Left vertical
+#define T_PIN 4  // Left vertical
 #define A_PIN 6 // right horizontal
 #define R_PIN 5 // left horizontal
-#define E_PIN 4 // right vertical
+#define E_PIN 7 // right vertical
 
 
 volatile unsigned long t_start, a_start, r_start, e_start;

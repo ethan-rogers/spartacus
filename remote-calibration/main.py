@@ -1,7 +1,7 @@
 import pygame
 
 
-from remote_serial import connect, read_data
+from remote_serial import *
 from calibration import *
 
 background_color = (144, 144, 144)
@@ -96,8 +96,9 @@ while running:
     # right stick
     pygame.draw.rect(screen, box_color, (width - box_x - box_size, box_y, box_size, box_size), width=box_thickness) 
   
-    for event in pygame.event.get():     
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            close_port()
             running = False
 
     pygame.display.flip()
