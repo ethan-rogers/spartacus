@@ -14,6 +14,7 @@ knob_radius = 10
 width = 400
 height = 300
 
+pygame.init()
 screen = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption('Spartacus Remote Calibration')
@@ -26,16 +27,22 @@ running = True
 box_thickness = 5
 box_size = 120
 
+text_spacing = 25
+
 box_x = 50
 box_y = height / 2 - box_size / 2
 
 connect()
+
+lv, rh, lh, rv = 1500, 1500, 1500 ,1500
 
 l_x = box_x + box_size/2
 l_y = box_y + box_size/2
 
 r_x = width - box_x - box_size/2
 r_y = box_y + box_size/2
+
+font = pygame.font.Font(None, 24)
 
 while running:
     screen.fill(background_color)
@@ -50,6 +57,8 @@ while running:
         l_y *= -box_size/2
         l_y += box_y + box_size/2
 
+
+
         l_x =  (lh - lh_center) /  lh_deviation
         l_x *= -box_size/2
         l_x += box_x + box_size/2
@@ -61,6 +70,18 @@ while running:
         r_x =  (rh - rh_center) /  rh_deviation
         r_x *= -box_size/2
         r_x += width - box_x - box_size/2
+
+    text_surface = font.render(str(lv), False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x - text_spacing, box_y + box_size/2)))
+
+    text_surface = font.render(str(lh), False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x + box_size/2, box_y + box_size + text_spacing)))
+
+    text_surface = font.render(str(rv), False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2)))
+
+    text_surface = font.render(str(rh), False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing)))
 
     # left knob
     pygame.draw.circle(screen, stick_color, (l_x, l_y), knob_radius, width=0)

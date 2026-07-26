@@ -1,6 +1,6 @@
 # naming on receiver schematic
-t_center = 1512
-t_deviation = 486
+t_center = 1580
+t_deviation = 500
 
 a_center = 1544
 a_deviation = 412
