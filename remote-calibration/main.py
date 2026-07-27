@@ -11,7 +11,7 @@ stick_color = (255, 0, 0)
 
 knob_radius = 10
 
-width = 400
+width = 450
 height = 300
 
 pygame.init()
@@ -28,8 +28,9 @@ box_thickness = 5
 box_size = 120
 
 text_spacing = 25
+text_proportion_spacing = 10
 
-box_x = 50
+box_x = 70
 box_y = height / 2 - box_size / 2
 
 connect()
@@ -42,6 +43,12 @@ l_y = box_y + box_size/2
 r_x = width - box_x - box_size/2
 r_y = box_y + box_size/2
 
+l_x_proportion = (lh - lh_center) /  lh_deviation
+l_y_proportion = (lv - lv_center) /  lv_deviation
+
+r_x_proportion = (rh - rh_center) /  rh_deviation
+r_y_proportion = (rv - rv_center) /  rv_deviation
+
 font = pygame.font.Font(None, 24)
 
 while running:
@@ -53,35 +60,47 @@ while running:
         print(data)
         lv, rh, lh, rv = map(int, data.split())
 
-        l_y =  (lv - lv_center) /  lv_deviation
-        l_y *= -box_size/2
+        l_x_proportion = (lh - lh_center) /  lh_deviation
+        l_y_proportion = (lv - lv_center) /  lv_deviation
+
+        r_x_proportion = (rh - rh_center) /  rh_deviation
+        r_y_proportion = (rv - rv_center) /  rv_deviation
+
+        l_y = -box_size/2 * l_y_proportion
         l_y += box_y + box_size/2
 
-
-
-        l_x =  (lh - lh_center) /  lh_deviation
-        l_x *= -box_size/2
+        l_x = -box_size/2 * l_x_proportion
         l_x += box_x + box_size/2
 
-        r_y =  (rv - rv_center) /  rv_deviation
-        r_y *= -box_size/2
+        r_y = -box_size/2 * r_y_proportion
         r_y += box_y + box_size/2
 
-        r_x =  (rh - rh_center) /  rh_deviation
-        r_x *= -box_size/2
+        r_x = -box_size/2 * r_x_proportion
         r_x += width - box_x - box_size/2
 
     text_surface = font.render(str(lv), False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(box_x - text_spacing, box_y + box_size/2)))
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x - text_spacing, box_y + box_size/2 + text_proportion_spacing)))
+
+    text_surface = font.render(f"{l_y_proportion:.2f}", False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x - text_spacing, box_y + box_size/2 - text_proportion_spacing)))
 
     text_surface = font.render(str(lh), False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(box_x + box_size/2, box_y + box_size + text_spacing)))
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x + box_size/2, box_y + box_size + text_spacing + text_proportion_spacing)))
+
+    text_surface = font.render(f"{l_x_proportion:.2f}", False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(box_x + box_size/2, box_y + box_size + text_spacing - text_proportion_spacing)))
 
     text_surface = font.render(str(rv), False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2)))
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2 + text_proportion_spacing)))
+
+    text_surface = font.render(f"{r_y_proportion:.2f}", False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2 - text_proportion_spacing)))
 
     text_surface = font.render(str(rh), False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing)))
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing + text_proportion_spacing)))
+
+    text_surface = font.render(f"{r_x_proportion:.2f}", False, box_color)
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing - text_proportion_spacing)))
 
     # left knob
     pygame.draw.circle(screen, stick_color, (l_x, l_y), knob_radius, width=0)
