@@ -31,11 +31,16 @@ text_spacing = 25
 text_proportion_spacing = 10
 
 box_x = 70
-box_y = height / 2 - box_size / 2
+box_y = 50
+
+power_x = box_x
+power_y = 250
 
 connect()
 
 lv, rh, lh, rv = 1500, 1500, 1500 ,1500
+
+connected = False
 
 l_x = box_x + box_size/2
 l_y = box_y + box_size/2
@@ -58,7 +63,9 @@ while running:
 
     if data != None:
         print(data)
-        lv, rh, lh, rv = map(int, data.split())
+        connected, lv, rh, lh, rv = map(int, data.split())
+
+        connected = bool(connected)
 
         l_x_proportion = (lh - lh_center) /  lh_deviation
         l_y_proportion = (lv - lv_center) /  lv_deviation
@@ -78,6 +85,8 @@ while running:
         r_x = -box_size/2 * r_x_proportion
         r_x += width - box_x - box_size/2
 
+
+
     text_surface = font.render(str(lv), False, box_color)
     screen.blit(text_surface, text_surface.get_rect(center=(box_x - text_spacing, box_y + box_size/2 + text_proportion_spacing)))
 
@@ -91,16 +100,23 @@ while running:
     screen.blit(text_surface, text_surface.get_rect(center=(box_x + box_size/2, box_y + box_size + text_spacing - text_proportion_spacing)))
 
     text_surface = font.render(str(rv), False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2 + text_proportion_spacing)))
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size - text_spacing, box_y + box_size/2 + text_proportion_spacing)))
 
     text_surface = font.render(f"{r_y_proportion:.2f}", False, box_color)
-    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x + text_spacing, box_y + box_size/2 - text_proportion_spacing)))
+    screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size - text_spacing, box_y + box_size/2 - text_proportion_spacing)))
 
     text_surface = font.render(str(rh), False, box_color)
     screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing + text_proportion_spacing)))
 
     text_surface = font.render(f"{r_x_proportion:.2f}", False, box_color)
     screen.blit(text_surface, text_surface.get_rect(center=(width - box_x - box_size/2, box_y + box_size + text_spacing - text_proportion_spacing)))
+
+    if (connected):
+        text_surface = font.render(f"POWER: ON", False, (0, 255, 0))
+    else:
+        text_surface = font.render(f"POWER: OFF", False, (255, 0, 0))
+
+    screen.blit(text_surface, (power_x,power_y))
 
     # left knob
     pygame.draw.circle(screen, stick_color, (l_x, l_y), knob_radius, width=0)
