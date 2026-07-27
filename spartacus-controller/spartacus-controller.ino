@@ -24,6 +24,8 @@ bool connected = false;
 float left_power = 1;
 float right_power = 1;
 
+float spinner_power = 1;
+
 volatile unsigned long t_start, a_start, r_start, e_start;
 volatile int t_val = 1500, a_val = 1500, r_val = 1500, e_val = 1500;
 
@@ -66,6 +68,12 @@ void setup() {
 void loop() {
   Serial.print(connected);
   Serial.print(" ");
+  Serial.print(spinner_power);
+  Serial.print(" ");
+  Serial.print(left_power);
+  Serial.print(" ");
+  Serial.print(right_power);
+  Serial.print(" ");
   Serial.print(t_val);
   Serial.print(" ");
   Serial.print(a_val);
@@ -94,6 +102,7 @@ void loop() {
     connected = false;
     left_power = 0;
     right_power = 0;
+    spinner_power = 0;
     delay(100);
     return;
   }
@@ -103,6 +112,11 @@ void loop() {
 
   lh = min(lh, 1);
   lh = max(lh, -1);
+
+  if (lh > 0)
+    spinner_power = lh;
+  else
+    spinner_power = 0;
 
   if (rv < MOVE_THRESH)
     rv = 0;
