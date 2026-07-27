@@ -1,6 +1,6 @@
 # naming on receiver schematic
 t_center = 1580
-t_deviation = 500
+t_deviation = 345
 
 a_center = 1544
 a_deviation = 412
@@ -9,7 +9,7 @@ r_center = 1560
 r_deviation = 404
 
 e_center = 1560
-e_deviation = 500
+e_deviation = 430
 
 # convenient code naming
 lv_center = t_center
