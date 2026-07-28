@@ -21,10 +21,10 @@
 
 bool connected = false;
 
-float left_power = 1;
-float right_power = 1;
+float left_power = 0;
+float right_power = 0;
 
-float spinner_power = 1;
+float spinner_power = 0;
 
 volatile unsigned long t_start, a_start, r_start, e_start;
 volatile int t_val = 1500, a_val = 1500, r_val = 1500, e_val = 1500;
@@ -66,6 +66,16 @@ void setup() {
 }
 
 void loop() {
+
+
+
+  float lv = float(t_val - T_CENTER) / float(T_DEVIATION);
+  float lh = float(r_val - R_CENTER) / float(R_DEVIATION);
+
+  float rv = float(e_val - E_CENTER) / float(E_DEVIATION);
+  float rh = float(a_val - A_CENTER) / float(A_DEVIATION);
+
+
   Serial.print(connected);
   Serial.print(" ");
   Serial.print(spinner_power);
@@ -83,14 +93,7 @@ void loop() {
   Serial.println(e_val);
 
 
-
-  float lv = float(t_val - T_CENTER) / float(T_DEVIATION);
-  float lh = float(r_val - R_CENTER) / float(R_DEVIATION);
-
-  float rv = float(e_val - E_CENTER) / float(E_DEVIATION);
-  float rh = float(a_val - A_CENTER) / float(A_DEVIATION);
-
-  if (lv < MOVE_THRESH)
+  if (abs(lv) < MOVE_THRESH)
     lv = 0;
 
   lv = min(lv, 1);
@@ -107,7 +110,7 @@ void loop() {
     return;
   }
 
-  if (lh < MOVE_THRESH)
+  if (abs(lh) < MOVE_THRESH)
     lh = 0;
 
   lh = min(lh, 1);
@@ -118,17 +121,28 @@ void loop() {
   else
     spinner_power = 0;
 
-  if (rv < MOVE_THRESH)
+  if (abs(rv) < MOVE_THRESH)
     rv = 0;
 
   rv = min(rv, 1);
   rv = max(rv, -1);
 
-  if (rh < MOVE_THRESH)
+  if (abs(rh) < MOVE_THRESH)
     rh = 0;
 
   rh = min(rh, 1);
   rh = max(rh, -1);
+
+  if (rh == 0){
+    left_power = rv;
+    right_power = rv;
+  }else if (rh < 0){
+    left_power = rv;
+    right_power = rv + rh * rv * 2;
+  }else{
+    right_power = rv;
+    left_power = rv - rh * rv * 2;
+  }
 
 
 

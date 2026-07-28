@@ -60,6 +60,9 @@ font = pygame.font.Font(None, 24)
 spinner_motor_label = font.render(f"Spinner", False, box_color)
 left_motor_label = font.render(f"Left", False, box_color)
 right_motor_label = font.render(f"Right", False, box_color)
+speed_motor_label = font.render(f"Speed", False, box_color)
+
+calculated_speed = 0
 
 connect()
 
@@ -161,7 +164,7 @@ while running:
 
     # motor power
     motor_pos_x = motor_x
-    for config in ((spinner_power, spinner_motor_label), (left_power, left_motor_label), (right_power, right_motor_label)):
+    for config in ((spinner_power, spinner_motor_label), (left_power, left_motor_label), (right_power, right_motor_label), (calculated_speed, speed_motor_label)):
         power, name = config
 
         pygame.draw.line(screen, box_color, (motor_pos_x, motor_y), (motor_pos_x, motor_y + motor_bar_height), width=motor_width)
