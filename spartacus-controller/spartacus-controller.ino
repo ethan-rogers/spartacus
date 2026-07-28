@@ -49,6 +49,24 @@ void e_ISR() {
   else e_val = micros() - e_start;
 }
 
+void send_serial(){
+  Serial.print(connected);
+  Serial.print(" ");
+  Serial.print(spinner_power);
+  Serial.print(" ");
+  Serial.print(left_power);
+  Serial.print(" ");
+  Serial.print(right_power);
+  Serial.print(" ");
+  Serial.print(t_val);
+  Serial.print(" ");
+  Serial.print(a_val);
+  Serial.print(" ");
+  Serial.print(r_val);
+  Serial.print(" ");
+  Serial.println(e_val);
+}
+
 void setup() {
   pinMode(T_PIN, INPUT);
   attachPCINT(digitalPinToPCINT(T_PIN), t_ISR, CHANGE);
@@ -76,21 +94,7 @@ void loop() {
   float rh = float(a_val - A_CENTER) / float(A_DEVIATION);
 
 
-  Serial.print(connected);
-  Serial.print(" ");
-  Serial.print(spinner_power);
-  Serial.print(" ");
-  Serial.print(left_power);
-  Serial.print(" ");
-  Serial.print(right_power);
-  Serial.print(" ");
-  Serial.print(t_val);
-  Serial.print(" ");
-  Serial.print(a_val);
-  Serial.print(" ");
-  Serial.print(r_val);
-  Serial.print(" ");
-  Serial.println(e_val);
+  send_serial();
 
 
   if (abs(lv) < MOVE_THRESH)
@@ -136,12 +140,13 @@ void loop() {
   if (rh == 0){
     left_power = rv;
     right_power = rv;
-  }else if (rh < 0){
-    left_power = rv;
-    right_power = rv + rh * rv * 2;
   }else{
-    right_power = rv;
-    left_power = rv - rh * rv * 2;
+    float rh_max = 1 / (1 + abs(rv / rh));
+    float rv_max = abs(rv / rh) * rh_max;
+
+    left_power = rv_max * rv - rh_max * rh;
+    right_power = rv_max * rv + rh_max * rh;
+
   }
 
 

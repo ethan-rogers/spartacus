@@ -61,8 +61,10 @@ spinner_motor_label = font.render(f"Spinner", False, box_color)
 left_motor_label = font.render(f"Left", False, box_color)
 right_motor_label = font.render(f"Right", False, box_color)
 speed_motor_label = font.render(f"Speed", False, box_color)
+angle_motor_label = font.render(f"Turn Rate", False, box_color)
 
 calculated_speed = 0
+calculated_turn_speed = 0
 
 connect()
 
@@ -97,6 +99,10 @@ while running:
         spinner_power, left_power, right_power = float(spinner_power), float(left_power), float(right_power)
         lv, rh, lh, rv = int(lv), int(rh), int(lh), int(rv)
         connected = int(connected)
+
+        calculated_speed = (left_power + right_power) / 2
+        calculated_turn_speed = (left_power - right_power) / 2
+
 
         l_x_proportion = (lh - lh_center) /  lh_deviation
         l_y_proportion = (lv - lv_center) /  lv_deviation
@@ -164,7 +170,7 @@ while running:
 
     # motor power
     motor_pos_x = motor_x
-    for config in ((spinner_power, spinner_motor_label), (left_power, left_motor_label), (right_power, right_motor_label), (calculated_speed, speed_motor_label)):
+    for config in ((spinner_power, spinner_motor_label), (left_power, left_motor_label), (right_power, right_motor_label), (calculated_speed, speed_motor_label), (calculated_turn_speed, angle_motor_label)):
         power, name = config
 
         pygame.draw.line(screen, box_color, (motor_pos_x, motor_y), (motor_pos_x, motor_y + motor_bar_height), width=motor_width)

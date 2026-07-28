@@ -2,7 +2,7 @@ import serial
 
 
 BAUD_RATE = 115200
-PORT = "COM8"
+PORT = "COM6"
 
 device = None
 
