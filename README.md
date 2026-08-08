@@ -3,7 +3,7 @@
 
 This repository is research and development of the electronics for the Spartacus Combat Robot. Currently working on deciding on motor and ESCs. 
 
-## Reciever
+## Receiver
 
 
 This section explains the remote system for the robot but can also be used as a standalone guide for reading DSM2 remotes from a microcontroller. Because of this, `reciever.ion` contains only the code for the receiving controller input. The remote for Spartacus is the DMX5e RC plane controller paired with the [CM410X Reciever](https://www.aliexpress.us/item/3256806225427514.html?spm=a2g0o.order_list.order_list_main.11.35ae1802HRsKbq&gatewayAdapt=glo2usa). The testing procedure below was done using an Arduino Nano. 
@@ -24,7 +24,7 @@ Despite the fact that there are no motors, the power that will be sent to them i
 
 ## Observation Software
 
-The observation software is meant to act as a convenient way of calibrating and debugging the robot. Currently, it shows the remote data and the power of each of the three motors. Future plans are for it to use this data to show the theoretical speed and direction of the robot. This is primarily meant to develop and test the microcontroller's logic while there are no motors attached. 
+The observation software is meant to act as a convenient way of calibrating and debugging the robot. Currently, it shows the remote data and the power of each of the three motors. It also shows the theoretical speed and turn rate of the robot as a percentage. This is primarily meant to develop and test the microcontroller's logic while there are no motors attached. 
 
 ![](images/screenshot.png)
 
