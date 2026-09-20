@@ -1,4 +1,4 @@
-#include <PinChangeInterrupt.h>
+//#include <PinChangeInterrupt.h>
 
 #define T_PIN 4  // Left vertical
 #define A_PIN 6 // right horizontal
@@ -69,16 +69,16 @@ void send_serial(){
 
 void setup() {
   pinMode(T_PIN, INPUT);
-  attachPCINT(digitalPinToPCINT(T_PIN), t_ISR, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(T_PIN), t_ISR, CHANGE);
 
   pinMode(A_PIN, INPUT);
-  attachPCINT(digitalPinToPCINT(A_PIN), a_ISR, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(A_PIN), a_ISR, CHANGE);
 
   pinMode(R_PIN, INPUT);
-  attachPCINT(digitalPinToPCINT(R_PIN), r_ISR, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(R_PIN), r_ISR, CHANGE);
 
   pinMode(E_PIN, INPUT);
-  attachPCINT(digitalPinToPCINT(E_PIN), e_ISR, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(E_PIN), e_ISR, CHANGE);
 
   Serial.begin(115200);
 }
