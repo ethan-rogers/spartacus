@@ -1,12 +1,28 @@
 # Spartacus Combat Robot
 
 
-This repository is research and development of the electronics for the Spartacus Combat Robot. Currently working on deciding on motor and ESCs. 
+This repository is research and development of the electronics for the Spartacus Combat Robot. Currently waiting on ESCs and motors.
+
+Completed
+* Remote input testing
+* Drive Logic
+* ESC, motor and battery selection
+* Schematic
+
+TODO
+* Final assembly
+* Debugging / performance tests
+
+
+## Schematic
+
+Below is the entire schematic. Each part is explained in further detail below.
+
+![](images/schematic.png)
 
 ## Receiver
 
-
-This section explains the remote system for the robot but can also be used as a standalone guide for reading DSM2 remotes from a microcontroller. Because of this, `reciever.ion` contains only the code for the receiving controller input. The remote for Spartacus is the DMX5e RC plane controller paired with the [CM410X Reciever](https://www.aliexpress.us/item/3256806225427514.html?spm=a2g0o.order_list.order_list_main.11.35ae1802HRsKbq&gatewayAdapt=glo2usa). The testing procedure below was done using an Arduino Nano. 
+This section explains the remote system for the robot but can also be used as a standalone guide for reading DSM2 remotes from a microcontroller. Because of this, `reciever.ion` contains only the code for the receiving controller input. The remote for Spartacus is the DMX5e RC plane controller paired with the [CM410X Reciever](https://www.aliexpress.us/item/3256806225427514.html?spm=a2g0o.order_list.order_list_main.11.35ae1802HRsKbq&gatewayAdapt=glo2usa). The testing procedure below was done using an SAMD21 STM32 microcontroller.
 
 NOTE: This controller is not recommended for combat robotics. Spartacus uses it since I already owned a DMX5e, but I would recommend using a different remote and receiver if purchasing the parts. 
 
