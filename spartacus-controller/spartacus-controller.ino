@@ -1,9 +1,9 @@
 //#include <PinChangeInterrupt.h>
 
-#define T_PIN 4  // Left vertical
-#define A_PIN 6 // right horizontal
-#define R_PIN 5 // left horizontal
-#define E_PIN 7 // right vertical
+#define T_PIN 9  // Left vertical
+#define A_PIN 7 // right horizontal
+#define R_PIN 10 // left horizontal
+#define E_PIN 8 // right vertical
 
 #define T_CENTER 1580
 #define T_DEVIATION 345
