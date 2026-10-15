@@ -14,6 +14,7 @@ TODO
 * Debugging / performance tests
 
 
+
 ## Schematic
 
 Below is the entire schematic. Each part is explained in further detail below.
@@ -48,6 +49,9 @@ The observation software is meant to act as a convenient way of calibrating and 
 
 This software is also important for remote calibration. Upload `receiver.ino` to a microcontroller. Connect the pins as indicated in that script and the receiver wiring diagram. The observation program connects to your device. Update the `PORT` values in `remote_serial.py` to match the port shown in the Arduino IDE. Change the center and deviation values in `calibration.py` so the top value next to the box is at 0 when at rest, and 1 or -1 when pushed all the way. Note that the value below this is the number of microseconds the PWM signal is high and is the same units used by the calibration variables. 
 
-## Robot CAD
+## CAD Models
 
+All of the CAD models were designed by the mechanical lead Tanner Bayly and 3D printed. They are located in the CAD folder.
+
+![](images/cad.png)
 
