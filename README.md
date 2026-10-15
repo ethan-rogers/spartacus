@@ -53,5 +53,5 @@ This software is also important for remote calibration. Upload `receiver.ino` to
 
 All of the CAD models were designed by the mechanical lead Tanner Bayly and 3D printed. They are located in the CAD folder.
 
-![](images/cad.png)
+![](images/cad.jpg)
 
